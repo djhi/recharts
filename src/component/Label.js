@@ -327,9 +327,19 @@ const parseViewBox = (props) => {
 
   if (isNumber(width) && isNumber(height)) {
     if (isNumber(x) && isNumber(y)) {
-      return { x, y, width, height };
+      return {
+        x: x + (width < 0 ? width : 0),
+        y: y + (height < 0 ? height : 0),
+        width: Math.abs(width),
+        height: Math.abs(height)
+      };
     } else if (isNumber(top) && isNumber(left)) {
-      return { x: top, y: left, width, height };
+      return {
+        x: top + (width < 0 ? width : 0),
+        y: left + (height < 0 ? height : 0),
+        width: Math.abs(width),
+        height: Math.abs(height)
+      };
     }
   }
 
